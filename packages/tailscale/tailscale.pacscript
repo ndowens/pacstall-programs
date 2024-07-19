@@ -1,5 +1,5 @@
 pkgname="tailscale"
-pkgver="1.58.2"
+pkgver="1.70.0"
 source=("https://github.com/tailscale/tailscale/archive/refs/tags/v${pkgver}.tar.gz")
 url="https://tailscale.com"
 depends=('iptables')
@@ -9,7 +9,7 @@ maintainer=("Nathan <ndowens@artixlinux.org>")
 arch=('amd64')
 repology=("project: ${pkgname}")
 incompatible=('ubuntu:jammy' 'debian:bookworm')
-sha256sums=("452f355408e4e2179872387a863387e06346fc8a6f9887821f9b8a072c6a5b0a")
+sha256sums=("SKIP")
 
 prepare() {
   cd "${_archive}"
@@ -18,8 +18,9 @@ prepare() {
 }
 
 build() {
+  export GOPROXY=direct
   cd "${_archive}"
-  export GO111MODULE=on
+ export GO111MODULE=on
   export GOFLAGS="-buildmode=pie -mod=readonly -modcacherw"
   _GO_LDFLAGS="-compressdwarf=false \
   	-linkmode=external \
